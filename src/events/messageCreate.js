@@ -3,7 +3,7 @@ const ini = require("../config/bot.json");
 const puppeteer = require("puppeteer");
 
 function extractNickname(text) {
-    const match = text.match(/^([\wа-яА-ЯёЁ]+)(?:\s*[\(\{\[][\wа-яА-ЯёЁ]+[\)\}\]])?$/);
+    const match = text.match(/^([\wа-яА-ЯёЁ]+)(?:\s*[({\[][\wа-яА-ЯёЁ]+[)}\]])?$/);
     return match ? match[1] : null;
 }
 
@@ -94,7 +94,6 @@ module.exports = {
                     ],
                     timestamp: new Date().toISOString(),
                     thumbnail: { url: `${imageSrc}` },
-                    color: 0x118f00
                 };
                 await message.reply({ content: "", embeds: [embedInfo] });
             } else {
