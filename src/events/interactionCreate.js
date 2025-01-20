@@ -13,7 +13,7 @@ module.exports = {
 
         const [action, userId] = interaction.customId.split("_");
         console.log(`[InteractionCreate] Action: ${action}, UserId: ${userId}`);
-        const member = interaction.guild.members.cache.get(userId);
+        const member = interaction.guild.members.fetch(userId);
         console.log(`[InteractionCreate] Member: ${member}`);
         if (!member) return interaction.reply({ content: "Пользователь не найден", ephemeral: true });
 
