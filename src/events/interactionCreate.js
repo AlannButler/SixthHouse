@@ -12,7 +12,9 @@ module.exports = {
         if (!hasRole) return interaction.reply({ content: "\`[❌] У вас нет доступа к выдачи роли!\`", ephemeral: true });
 
         const [action, userId] = interaction.customId.split("_");
+        console.log(`[InteractionCreate] Action: ${action}, UserId: ${userId}`);
         const member = interaction.guild.members.cache.get(userId);
+        console.log(`[InteractionCreate] Member: ${member}`);
         if (!member) return interaction.reply({ content: "Пользователь не найден", ephemeral: true });
 
         const role = interaction.guild.roles.cache.get(guildConfig.roleId);
