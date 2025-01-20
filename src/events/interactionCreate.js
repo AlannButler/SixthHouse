@@ -5,7 +5,7 @@ module.exports = {
     name: Events.InteractionCreate,
     async execute(interaction) {
         if (!interaction.isButton()) return;
-
+        console.log(`[InteractionCreate] CustomId: ${interaction.customId}`);
         const guildConfig = ini.guilds[interaction.guild.id];
         const hasRole = interaction.member.roles.cache.some(role => guildConfig.accessRoles.includes(role.id));
 
