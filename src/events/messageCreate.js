@@ -11,6 +11,13 @@ module.exports = {
     async execute(message) {
         if (message.author.bot) return;
         const guildConfig = ini.guilds[message.guild.id];
+        if (message.content === "/zayav") {
+            const embedInfo = {
+                color: 0xa87b00,
+                title: "**Подача заявок в гильдию Шестой Дом**",
+                description: "Используя кнопку ниже, вы можете подать заявку в гильдию./nОт вас требуется лишь быть активным в игре."
+            }
+        }
         if (message.channel.id === guildConfig.requestChannel) {
             if (message.member.roles.cache.has(guildConfig.roleId)) return message.delete();
             const nickname = extractNickname(message.content);
