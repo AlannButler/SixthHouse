@@ -13,16 +13,26 @@ module.exports = {
         const guildConfig = ini.guilds[message.guild.id];
         if (message.content === "/zayav") {
             const embedInfo = {
-                color: 0xa87b00,
+                color: 0xe74c3c,
                 title: "**Подача заявок в гильдию Шестой Дом**",
-                description: "Используя кнопку ниже, вы можете подать заявку в гильдию./nОт вас требуется лишь быть активным в игре."
+                description: "Приветствуем новоприбывших, если вы желаете стать частью нашей гильдии **\"Шестой Дом\"** - воспользуйтесь кнопкой ниже для заполнения заявки.\n\nОт вас требуется лишь активность в игре, мы же в свою очередь предоставляем следующие возможности:\n\`\`\`• Помощь в прокачке/вопросах по геймплею\n• Постоянные гильдейские рейды(берем вагончиков)\n• Конкурсы на голду/предметы\`\`\`"
             }
+
+            const buttons = new ActionRowBuilder().addComponents(
+                new ButtonBuilder().setCustomId("requestGuild").setLabel("Подать заявку").setStyle(ButtonStyle.Danger).setEmoji({ name: "📝" })
+            )
+
+            await message.channel.send({ 
+                content: "", 
+                embeds: [embedInfo],
+                components: [buttons]
+            });
         }
         if (message.channel.id === guildConfig.requestChannel) {
             if (message.member.roles.cache.has(guildConfig.roleId)) return message.delete();
             const nickname = extractNickname(message.content);
             const embedInfo = {
-                color: 0xa87b00,
+                color: 0xe74c3c,
                 title: `**Запрос на выдачу роли:**`,
                 description: `\`\`\`${message.content}\`\`\``,
                 fields: [{ name: "Профиль:", value: `[${nickname}](https://sirus.su/base/character/x1/${nickname}/)` }],
