@@ -104,7 +104,6 @@ module.exports = {
 
         }
 
-        if (message.content === "")
         if (message.channel.id === guildConfig.requestChannel) {
             if (message.member.roles.cache.has(guildConfig.roleId)) return message.delete();
             const nickname = extractNickname(message.content);
