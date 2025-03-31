@@ -104,6 +104,22 @@ module.exports = {
 
         }
 
+        if (message.channel.id === guildConfig.zamenaChannel) {
+            if (!message.member.roles.cache.has(guildConfig.raidLeaderId)) return;
+            if (message.channel.isThread()) return;
+
+            const threadName = `Замена для ${message.author.username}`;
+
+            const thread = await message.channel.threads.create({
+                name: threadName,
+                reason: `Новое сообщение от Рейд Лидера ${message.author.username}(ID: ${message.author.id})`
+            })
+
+            const welcomeMessage = "Ветка создана для желающих поучаствовать в рейде в качестве замены.";
+
+            await thread.send({ content: welcomeMessage });
+        }
+
         if (message.channel.id === guildConfig.requestChannel) {
             if (message.member.roles.cache.has(guildConfig.roleId)) return message.delete();
             const nickname = extractNickname(message.content);
